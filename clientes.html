@@ -1,0 +1,49 @@
+
+<cfquery  style="color:#191970"  name="getClients" datasource="seuDataSource">
+    SELECT Codigo, Nome, DataNascimento
+    FROM (nomeDaTabela)
+</cfquery>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style/clienteStyle.css">
+
+<title>Lista de Clientes</title>
+
+</head>
+<body>
+    <h1>Clientes</h1>
+    <label for="filter">Filtrar:</label>
+    <select id="filter">
+        <option value="todos">Todos</option>
+        <option value="aniversariantes">Aniversariantes do Mês</option>
+    </select>
+    <table id="clientesTable">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>Dia da Semana</th>
+            </tr>
+        </thead>
+        <tbody>
+            <cfoutput query="getClients">
+                <tr>
+                    <td>#Codigo#</td>
+                    <td>#Nome#</td>
+                    <td>#Dateformat(DataNascimento, 'dd/mm/yyyy')#</td>
+                    <td class="diaSemana">#DateFormat(DataNascimento, 'dddd')#</td>
+                </tr>
+            </cfoutput>
+        </tbody>
+    </table>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/clienteScript.js"></script>
+
+</body>
+</html>
